@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <ul id="ul" name="ulName" class="ulClass">
+        <li class="item1" name="item1">item1</li>
+        <li class="item1" name="item2">item2</li>
+        <li class="item1" name="item3">item3</li>
+        <li class="item1" name="item4">item4</li>
+    </ul>
+</div>
+<script>
+
+    function outputAttributes(element){
+        var pairs=new Array(),attrName,attrValue,i,len;
+        for(i=0,len=element.attributes.length;i<len;i++){
+            attrName=element.attributes[i].nodeName;
+            attrValue=element.attributes[i].nodeValue;
+            if(element.attributes[i].specified){
+                pairs.push(attrName + "=\"" + attrValue + "\"");
+            }
+        }
+        return pairs.join("");
+    }
+  var ulNode=document.getElementById("ul").childNodes;
+   var arry=[];
+    for(var j=0;j<ulNode.length;j++){
+        if(ulNode[j].nodeType===1){
+            arry.push(ulNode[j]);
+            console.log(outputAttributes(ulNode[j]));
+        }
+    }
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

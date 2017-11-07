@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文档碎片</title>
+</head>
+<body>
+   <div>
+       <ul id="myList"></ul>
+   </div>
+<script>
+    var fragment=document.createDocumentFragment();
+    var ul=document.getElementById("myList");
+    var li=null;
+    for(var i=0;i<3;i++){
+        li=document.createElement("li");
+        li.appendChild(document.createTextNode("Item"+(i+1)));
+        fragment.appendChild(li);
+    }
+    ul.appendChild(fragment);
+</script>
+</body>
+</html>
