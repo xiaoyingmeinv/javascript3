@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //在不同浏览器中获取样式表对象
+    function getStyleSheet(element){
+        return element.sheet || element.styleSheet;
+    }
+  //添加规则函数
+    function insertRule(sheet,selectorText,cssText,position){
+        if(sheet.insertRule){
+            sheet.insertRule(selectorText+"{"+cssText+"}",position);
+        }else if(sheet.addRule){
+            sheet.addRule(selectorText,cssText,position);
+        }
+    }
+    insertRule(document.styleSheets[0],"body","background-color:silver",0);
+    //删除规则函数
+    function deleteRule(sheet,index){
+        if(sheet.deleteRule){
+            sheet.deleteRule(index);
+        }else if(sheet.removeRule){
+            sheet.removeRule(index);
+        }
+    }
+deleteRule(document.styleSheets[0],0);
+</script>
+</body>
+</html>

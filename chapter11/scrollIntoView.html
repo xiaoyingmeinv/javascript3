@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scrollIntoView</title>
+</head>
+<body>
+<script>
+    var element = document.getElementById("box");
+
+    element.scrollIntoView();
+    element.scrollIntoView(false);
+    element.scrollIntoView({block: "end"});
+    element.scrollIntoView({block: "end", behavior: "smooth"});
+</script>
+</body>
+</html>

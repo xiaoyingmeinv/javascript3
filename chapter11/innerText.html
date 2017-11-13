@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function getInnerText(element){
+        return (typeof element.textContent=="string")?
+            element.textContent:element.innerText;
+    }
+    function setInnerText(element,text){
+        if(typeof element.textContent=='string'){
+            element.textContent=text;
+        }else{
+            element.innerText=text;
+        }
+    }
+
+    //outerText这个属性会导致调用他的元素不存在，因此并不常用。
+
+</script>
+</body>
+</html>

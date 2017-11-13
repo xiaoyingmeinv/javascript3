@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <ul>
+        <li class="item1" id="item1">item1</li>
+        <li class="item2">item2</li>
+        <li class="item3">item3</li>
+        <li class="item4">item4</li>
+    </ul>
+</div>
+<script>
+function contains(refNode,otherNode){
+    if(typeof refNode.contains=="function" && (!client.engine.webkit || client.engine.webkit>=522)){
+        return refNode.contains(otherNode);
+    }else if(typeof refNode.compareDocumentPosition=="function"){
+        return !!(refNode.compareDocumentPistion(otherNode)&16);
+    }else{
+        var node=otherNode.parentNode;
+        do{
+            if(node==refNode){
+                return true;
+            }else{
+                node=node.parentNode;
+            }
+        }while(node!==null);
+        return false;
+    }
+}
+</script>
+</body>
+</html>

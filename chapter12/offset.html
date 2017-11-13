@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+       .box{
+           width:100px;
+           height:100px;
+           background:red;
+           padding:10px;
+           margin:10px;
+           border:solid 1px black;
+       }
+    </style>
+</head>
+<body>
+<div class="box">偏移量</div>
+<script>
+ var box=document.getElementsByClassName("box")[0];
+ console.log("offsetHeight:"+box.offsetHeight);
+ console.log("offsetWidth:"+box.offsetWidth);
+ console.log("offsetLeft:"+box.offsetLeft);
+ console.log("offsetTop:"+box.offsetTop);
+ console.log("clientWidth:"+box.clientWidth);
+ console.log("clientHeight:"+box.clientHeight);
+
+/**offsetWidth=width + paddingLeft + paddingRight + borderLeft + borderRight**/
+
+ /**offsetHeight=height + paddingTop + paddingBottom + borderTop + borderBottom**/
+
+
+ //获取左偏移量
+ function getElementLeft(element){
+     var actualLeft=element.offsetLeft;
+     var current=element.offsetParent;
+     while(current !==null){
+         actualLeft+=current.offsetLeft;
+         current=current.offsetParent;
+     }
+     return actualLeft;
+ }
+
+ //获取上偏移量
+ function getElementTop(element){
+     var actualTop=element.offsetTop;
+     var current=element.offsetParent;
+     while(current!==null){
+         actualTop+=current.offsetTop;
+         current=current.offsetParent;
+     }
+     return actualTop;
+ }
+
+
+
+</script>
+</body>
+</html>

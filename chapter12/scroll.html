@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:1200px;
+            height:3000px;
+            overflow:scroll;
+           background:yellow;
+        }
+        .content{
+            width:200px;
+            height:200px;
+            border:solid 1px red;
+            overflow:scroll;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+
+    <div class="box">滚动大小</div>
+</div>
+
+<script>
+ var box=document.getElementsByClassName("content")[0];
+ var ss=box.getBoundingClientRect().top;
+ console.log("scrollHeight:"+box.scrollHeight);
+ box.scrollTop="500"
+ console.log("scrollTop:"+box.scrollTop);
+console.log("getBoundingClientRect:"+ss);
+
+ //检测元素是否位于定位，如果不是就将其滚回到顶部
+    function scrollToTop(element){
+        if(element.scrollTop !=0){
+            element.scrollTop = 0;
+        }
+    }
+</script>
+</body>
+</html>
