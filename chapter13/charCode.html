@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>charCode</title>
+</head>
+<body>
+<div id="charText">charCode</div>
+<script src="eventUtil.js"></script>
+<script>
+    var myText=document.getElementById("charText");
+    EventUtil.addHandler(myText,"keypress",function(event){
+        event =EventUtil.getEvent(event);
+        alert(EventUtil.getCharCode(event));
+    })
+</script>
+</body>
+</html>

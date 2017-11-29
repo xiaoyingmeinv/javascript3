@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>keyLocation</title>
+</head>
+<body>
+<input type="text" id="keyLocation"/>
+<script src="eventUtil.js"></script>
+<script>
+    var textbox=document.getElementById("keyLocation");
+/*    EventUtil.addHandler(textbox,"onkeypress",function(event){
+        event=EventUtil.getEvent(event);
+        var loc=event.location || event.keyLocation;
+        if(loc){
+            alert(loc);
+        }
+    })*/
+
+/*EventUtil.addHandler(textbox,"keypress",function(event){
+    event=EventUtil.getEvent(event);
+    if(event.getModifierState){
+        alert(event.getModifierState("Shift"));
+    }
+})*/
+
+EventUtil.addHandler(textbox,"textInput",function(event){
+    event=EventUtil.getEvent(event);
+    alert(event.data);
+})
+</script>
+</body>
+</html>

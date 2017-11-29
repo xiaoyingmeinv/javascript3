@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DomModified</title>
+</head>
+<body>
+<div id="myList">DomModified</div>
+<script src="eventUtil.js"></script>
+<script>
+    EventUtil.addHandler(window,"load",function(event){
+        var list=document.getElementById("myList");
+        EventUtil.addHandler(document,"DOMSubtreeModified",function(event){
+            alert(event.type);
+            alert(event.target);
+        });
+        EventUtil.addHandler(document,"DOMNodeRemoved",function(event){
+            alert(event.type);
+            alert(event.target);
+            alert(event.relatedNode);
+        });
+        EventUtil.addHandler(document,"DOMNodeRemovedFromDocument",function(event){
+            alert(event.type);
+            alert(event.target);
+        });
+        list.parentNode.removeChild(list);
+    })
+</script>
+</body>
+</html>

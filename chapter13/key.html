@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改键</title>
+</head>
+<body>
+<div id="changeKey">修改键</div>
+<script src="eventUtil.js"></script>
+<script>
+ var changeKey=document.getElementById("changeKey");
+ EventUtil.addHandler(changeKey,"click",function(event){
+     event=EventUtil.getEvent(event);
+     var keys=new Array();
+     if(event.shiftKey){
+         keys.push("shift");
+     }
+     if(event.ctrlKey){
+         keys.push("ctrl");
+     }
+     if(event.altKey){
+         keys.push("alt");
+     }
+     if(event.metaKey){
+         keys.push("meta");
+     }
+     alert("keys:"+keys.join(","));
+
+ })
+</script>
+</body>
+</html>

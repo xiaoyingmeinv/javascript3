@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="mouseEvents">mouseEvents</div>
+<script src="eventUtil.js"></script>
+<script>
+var mouseEvents=document.getElementById("mouseEvents");
+EventUtil.addHandler(mouseEvents,"mousedown",function(event){
+    event=EventUtil.getEvent(event);
+    alert(EventUtil.getButton(event));
+})
+</script>
+</body>
+</html>

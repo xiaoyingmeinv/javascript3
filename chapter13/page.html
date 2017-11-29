@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="page">pageX+pageY</div>
+<script src="eventUtil.js"></script>
+<script>
+var page=document.getElementById("page");
+EventUtil.addHandler(page,"click",function(event){
+    event=EventUtil.getEvent(event);
+    var pageX=event.pageX;
+    var pageY=event.pageY;
+    if(pageX===undefined){
+        pageX=event.clientX+(document.body.scrollLeft || document.documentElement.scrollLeft);
+    }
+    if(pageY===undefined){
+        pageY=event.clientY+(document.body.scrollTop || document.documentElement.scrollTop)
+    }
+    console.log("Page coordinates:"+pageX+","+pageY);
+})
+</script>
+</body>
+</html>
