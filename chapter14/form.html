@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post"  id="myForm">
+    <ul>
+        <li><input type="hidden" name="color" value="red"/>Red</li>
+        <li><input type="radio" name="color" value="green"/>Green</li>
+        <li><input type="radio" name="color" value="blue"/>Blue</li>
+        <input type="submit">
+    </ul>
+</form>
+<script src="../chapter13/eventUtil.js"></script>
+<script>
+    var form=document.getElementById("myForm");
+
+    var colorFields=form.elements["color"];
+  /*  alert(colorFields.length);*/
+
+    var firstColorField=colorFields[0];
+    var firstFormField=form.elements[0];
+ /*   alert(firstColorField===firstFormField);*/
+
+/* EventUtil.addHandler(form,'submit',function(event){
+     event=EventUtil.getEvent(event);
+     var target=EventUtil.getTarget(event);
+     var btn=target.elements['submit-btn'];
+
+     //禁用它
+     btn.disabled=true;
+ })*/
+
+ EventUtil.addHandler(form,'load',function(event){
+       document.forms[0].elements[0].focus();
+    })
+</script>
+</body>
+</html>
