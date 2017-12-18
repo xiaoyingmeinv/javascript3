@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  /*使用借用构造函数模式的优缺点：
+  * 1、借用构造函数模式的缺点：无法从原型中继承任何东西，并且原型也仅是添加可重用方法及属性位置，它并不会为每个实例重新创建原型。
+  * 2、借用构造函数有点:可以获得父对象自身成员的真实副本，并且不会存在子对象意外覆盖父对象属性的风险。
+  * */
+  function Parent(name){
+      this.name=name||'Adam';
+  }
+  Parent.prototype.say=function(){
+      return this.name;
+  }
+  function Child(){
+      Parent.apply(this,arguments);
+  }
+  var kid=new Child();
+  console.log(kid.name);
+</script>
+</body>
+</html>

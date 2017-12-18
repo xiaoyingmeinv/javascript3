@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /***代理模式*/
+    function inherit(C,P){
+        function F(){};
+        F.prototype=P.prototype;
+        C.prototype=new F();
+        C.uber=P.prototype;
+        C.prototype.constructor=C;
+    }
+
+
+    /***圣杯模式：避免每次需要实现继承时都创建临时构造函数。仅创建一次临时构造函数，并且修改原型。具体实现可以使用即时函数并在闭包中存储代理函数。*/
+   var inherit=(function(){
+       var F=function(){};
+       return function (C,P){
+           F.prototype=P.prototype;
+           C.prototype=new F();
+           C.uber=P.prototype;
+           C.prototype.constructor=C;
+       }
+    }())
+    function Parent(name){
+        this.name=name||'Adam';
+    }
+    Parent.prototype.say=function(){
+        return this.name;
+    }
+    function Child(){}
+</script>
+</body>
+</html>

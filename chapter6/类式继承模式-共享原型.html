@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  /* 默认模式和共享模式的区别：
+  * 共享模式是将子对象的原型与父对象的原型设置为相同的即可。
+  * 默认模式是将子对象的原型设置为父对象的实例*/
+
+function inherit(C,P){
+    C.prototype=P.prototype;
+}
+function Parent(name){
+    this.name=name;
+}
+
+Parent.prototype.say=function(){
+    return this.name;
+}
+
+function Child(){}
+inherit(Child,Parent);
+
+var kid=new Child();
+
+</script>
+</body>
+</html>

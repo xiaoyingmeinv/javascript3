@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+ /*   代码复用有一个著名的原则，是GoF提出的：优先使用对象组合，而不是类继承。在javascript中，并没有类的概念，所以代码的复用，也并不局限于类式继承。javascript中创建对象的方法很多，有构造函数，可以使用new创建对象，并且可以动态的修改对象。javascript的非类式继承（可称为现代继承模式）复用方法也很多，例如，利用其它对象组合成所需要的对象，对象混入技术，借用和复用所需要的方法。
+
+    类式继承模式-默认模式
+
+    两个构造函数Parent和Child的例子：
+
+    复制代码 代码如下:*/
+
+        function Parent(name){
+            this.name = name||"Adam";
+        }
+        Parent.prototype.say = function(){
+           return this.name;
+        };
+        function Child(name){
+        }
+        inherit(Child,Parent);
+
+  /*  下面是可复用继承函数inherit()的一种实现方法：
+
+    复制代码 代码如下:*/
+
+        function inherit(C,P){
+            C.prototype = new P();
+        }
+   /* 这里原型属性应该指向一个对象，而不是一个函数，因此他必须指向一个由父构造函数所创建的实例，而不是指向构造函数本身。
+
+    在这之后，创建Child对象时，会通过原型从Parent实例获得他的功能：
+
+    复制代码 代码如下:
+*/
+       var kid =new Child();
+       kid.say();//"Adam"
+   /* 调用继承之后的原型链：
+
+    进一步添加kid的属性：
+
+    复制代码 代码如下:*/
+
+        var kid = new Child();
+        kid.name = "Patrick";
+        kid.say();//"Patrick"
+   /** 原型链的变化情况：
+
+    可以在自己对象属性里面找到name,就不用再去查找原型链了。
+
+    使用上述模式的缺点，其中一个缺点是同时继承了两个对象的属性，即添加到this的属性及原型属性。大多数时候，不需要自身的这些属性。
+
+    另外一个缺点，使用inherit()继承不支持将参数传递给子构造函数中，例如：
+
+    复制代码 代码如下:**/
+
+        var s = new Child("Seth");
+            s.say();//"Adam"
+   /* 这个结果并不是期望的，虽然子构造函数可以将参数传递到父构造函数中，但是这样每次需要一个子对象时，都必须重新执行这种继承机制，而且效率低下，原因是最终会重新创建父对象。
+
+    本文就先到这里了，后续我们将持续更新javascript代码复用模式的其余几种模式。*/
+</script>
+</body>
+</html>
