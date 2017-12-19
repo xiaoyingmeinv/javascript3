@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>extend深复制</title>
+</head>
+<body>
+<script>
+    function extendDeep(parent,child){
+        var i;
+        child=child||{};
+        for(i in parent){
+            if(parent.hasOwnProperty(i)){
+                if(typeof parent[i]==='object'){
+                    child[i]=(Object.prototype.toString.call(parent[i])==='[object Array]')?[]:{};
+                    extendDeep(parent[i],child[i]);
+
+                }else{
+                    child[i]=parent[i];
+                }
+            }
+        }
+        return child;
+    }
+
+    var dad={
+        counts:[
+            {name:"xiaoxiao"},
+            {age:18}
+        ],
+        reads:{paper:true}
+    }
+
+    var kid=extendDeep(dad);
+    console.log(kid);
+</script>
+</body>
+</html>

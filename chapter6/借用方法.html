@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*借用方法：
+    * 只想使用所需要的方法，而不希望继承所有那些永远都不会用到的其他方法。
+    * 在这种情况下，可以通过使用借用方法模式来实现，而这是受益于call()和apply()函数方法。
+    * */
+
+   /* function f(){
+        var args=[].slice.call(arguments,1,3);
+        return args;
+    }
+    f(1,2,3,4,5,6);*/
+
+
+    /*借用和绑定：
+    * 绑定this值*/
+   var one={
+        name:'object',
+        say:function(greet){
+
+            return greet+','+this.name;
+        }
+    }
+  one.say('hi');
+
+ /* var ss=one.say;
+     console.log(ss("hahaha"))*/
+
+   var two={
+        name:'another object'
+    }
+   /* one.say.apply(two,['hello']);
+    console.log( one.say.apply(two,['hello']));*/
+
+/*var yetanother={
+    name:"Yet another object",
+    method:function(callback){
+        console.log(this.name);
+        return callback('Hola');
+    }
+}
+    yetanother.method(one.say);*/
+
+
+
+/*以上函数中say()方法内部的this指向了全局对象，并且真个代码段都无法按照预期
+* 正常运行。为了修复（也就是说，绑定）对象与方法之间的关系。我们可以使用如下
+* 一个简单函数：*/
+
+function bind(o,m){
+    return function(){
+        return m.apply(o,[].slice.call(arguments));
+    }
+}
+
+var twosay=bind(two,one.say);
+console.log(twosay('yo'));
+</script>
+</body>
+</html>

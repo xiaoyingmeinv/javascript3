@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>extend浅复制</title>
+</head>
+<body>
+<script>
+    function extend(parent,child){
+        var i;
+        child=child||{};
+        for(i in parent){
+            if(parent.hasOwnProperty(i)){
+               child[i]=parent[i];
+            }
+        }
+        return child;
+    }
+    var dad={name:'Adam'};
+    var kid=extend(dad);
+    kid.name;
+</script>
+</body>
+</html>

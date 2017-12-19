@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>混入模式</title>
+</head>
+<body>
+<script>
+   /*mix-in模式并不是复制一个完整的对象，而是从多个对象中复制出任意的成员并将这些成员组合成一个新的对象。*/
+   function mix(){
+       var arg,prop,child={};
+       for(arg=0;arg<arguments.length;arg+=1){
+           for(prop in arguments[arg]){
+               if(arguments[arg].hasOwnProperty(prop)){
+                   child[prop]=arguments[arg][prop];
+               }
+           }
+       }
+       return child;
+   }
+   var cake=mix(
+       {eggs:2,large:true},
+       {butter:1,salted:true},
+       {flour:"3 cups"},
+       {sugar:"sure"}
+   );
+
+   console.log(cake);
+
+   /*个人总结：
+   * 有点类似extend浅复制的通用方式。
+   * */
+</script>
+</body>
+</html>
