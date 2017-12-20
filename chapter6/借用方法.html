@@ -53,14 +53,30 @@
 * 正常运行。为了修复（也就是说，绑定）对象与方法之间的关系。我们可以使用如下
 * 一个简单函数：*/
 
-function bind(o,m){
+/*function bind(o,m){
     return function(){
         return m.apply(o,[].slice.call(arguments));
     }
 }
 
 var twosay=bind(two,one.say);
-console.log(twosay('yo'));
+console.log(twosay('yo'));*/
+
+/*ES5之前Function.prototype.bind*/
+if(typeof Function.prototype.myBind==='undefined'){
+    Function.prototype.myBind=function(thisArg){
+        var fn=this,
+            slice=Array.prototype.slice,
+            args=slice.call(arguments,1);
+        return function(){
+            return fn.apply(thisArg,args.concat(slice.call(arguments)));
+        }
+    }
+}
+
+var twosay2=one.say.myBind(two,"EEEEE");
+
+    console.log(twosay2("sssss"));
 </script>
 </body>
 </html>

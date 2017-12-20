@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单体模式</title>
+</head>
+<body>
+<script>
+   /***1、单体模式的思想：单体模式在于保证一个特定类仅有一个实例。这意味着当您第二次使用
+   * 同一个类创建对象的时候，应该得到与第一次所创建对象完全相同的对象。
+   * 2、在js中没有类，只有对象。当您创建一个新对象时，实际上没有其他对象与其类似，因此新对象已经是单体了。
+   * 使用对象字面量创建一个简单的对象也是一个单体。
+   * 3、在JS中，对象之间永远不会完全相等，除非他们是同一个对象，因此即使创建一个具有完全相同成员的同类对象，他也不会与第一个对象完全相同。
+   * 因此，可以认为每次在使用对象字面量创建对象的时候，实际上就正在创建一个单体，并且并不涉及任何特殊语法。
+   *
+   * 4、使用同一个构造函数以new操作符来创建多个对象以获得指向完全相同的对象的新指针的三种方法：
+   * NO.1:使用全局变量来存储实例。
+   * 缺点：
+   * a:全局变量容易污染全局环境，容易引发命名冲突。
+   * b:任何人都能够覆盖该全局变量。
+   * NO.2:可以再构造函数的静态属性中缓存该实例。
+   * 缺点：构造函数公有静态属性是公开可访问的属性，在外部代码中可能会修改该属性，以至于让您丢失该实例。
+   *NO.3:可以将该实例包装在闭包中.
+   * 缺点：带来额外的闭包开销。
+   * 优点：保证了实例的私有性并且保证实例不会被构造函数之外的代码所修改。
+   * ***/
+
+
+
+/*function Person(name){
+        this.name="hahahah";
+    }
+    Person.prototype.say=function(age){
+        return this.name;
+    }
+
+    var s1=new Person();
+    var s2=new Person();
+     console.log(s1===s2);//false。
+   console.log( s2.constructor===Person)*/
+
+
+
+    /********静态属性中的实例**********/
+  /*  function Universe(){
+        if(typeof Universe.instance==='object'){
+            return Universe.instance;
+        }
+        this.start_time=0;
+        this.bang="Big";
+        //缓存
+        Universe.instance=this;
+
+        //隐式返回
+        return this;
+    }
+
+    var uni=new Universe();
+    var uni2=new Universe();
+
+    console.log(uni===uni2);*//*该方法的缺点是instance属性是公开的。*/
+
+
+
+    /********闭包中的实例********/
+  /*  function Universe(){
+        //缓存实例
+        var instance=this;
+
+        this.start_time=0;
+        this.bang="Big";
+
+        //重写该构造函数
+        Universe=function(){
+            return instance;
+        }
+    }
+
+    var uni=new Universe();
+    var uni2=new Universe();
+    console.log(uni===uni2);/!*缺点：重写构造函数会丢失所有在初始化定义和重定义时刻之间添加到它里面的属性。*!/
+
+    /!****测试****!/
+    Universe.prototype.nothing=true;
+    var uni=new Universe();
+    //在创建初始化对象之后，再次向该原型添加属性。
+    Universe.prototype.everything=true;
+    var uni2=new Universe();
+
+    uni.nothing;//true;
+    uni2.nothing;//true;
+
+    uni.everything;//undefined
+    uni2.everything;//undefined
+
+    //结果看上去是正确的：
+    uni.constructor.name;//Universe;
+    uni.constructor==='Universe';//false*/
+
+
+
+/*function Universe(){
+    var instance;
+
+    Universe=function Universe(){
+        return instance;
+    };
+    Universe.prototype=this;
+
+    instance=new Universe();
+
+    //重置构造函数指针
+    instance.constructor=Universe;
+
+    //所有功能
+    instance.start_time=0;
+    instance.bang="Big";
+
+    return instance;
+}
+
+var uin=new Universe();
+
+console.log(uin.constructor===Universe);*/
+   var Universe
+ (function(){
+    var instance;
+    Universe=function Universe(){
+        if(instance){
+            return instance;
+        }
+        instance=this;
+
+        //所有功能
+        this.start_time=0;
+        this.bang="Big";
+    }
+}());
+
+    var H1=new Universe();
+   var H2=new Universe();
+   console.log(H1===H2);
+</script>
+
+</body>
+</html>
