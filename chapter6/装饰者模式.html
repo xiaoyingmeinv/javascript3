@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>装饰者模式</title>
+</head>
+<body>
+<script>
+   function Sale(price){
+       this.price=price||100;
+   }
+   Sale.prototype.getPrice=function(){
+       return this.price;
+   }
+
+   Sale.decorators={};
+   Sale.decorators.fedtax={
+       getPrice:function(){
+           var price=this.uber.getPrice();
+           price+=price*5 / 100;
+           return price;
+       }
+   }
+   Sale.decorators.quebec={
+       getPrice:function(){
+           var price=this.uber.getPrice();
+           price+=price*7.5 / 100;
+           return price;
+       }
+   }
+   Sale.decorators.money={
+       getPrice:function(){
+           return "$"+this.uber.getPrice().toFixed(2);
+       }
+   }
+   Sale.decorators.cdn={
+       getPrice:function(){
+           return "CDN$"+this.uber.getPrice().toFixed(2);
+       }
+   }
+
+   Sale.prototype.decorate=function(decorator){
+       var F=function(){},
+           overrides=this.constructor.decorators[decorator],
+           i,newobj;
+       F.prototype=this;
+       newobj=new F();
+       newobj.uber=F.prototype;
+       for(i in overrides){
+           if(overrides.hasOwnProperty(i)){
+               newobj[i]=overrides[i];
+           }
+       }
+       return newobj;
+   }
+   var sale=new Sale(100);
+   sale.decorate('fedtax');
+   console.log(sale.decorate('fedtax'));
+   console.log(sale.decorate('quebec'));
+   console.log(sale.decorate('money'));
+   console.log(sale.decorate('cdn'));
+   console.log(sale.getPrice());
+
+  /* function Sale(price){
+       this.price=(price>0)||100;
+       this.decorators_list=[];
+   }
+   Sale.decorators={};
+   Sale.decorators.fedtax={
+       getPrice:function(price){
+           var price=this.uber.getPrice();
+           price+=price*5 / 100;
+           return price;
+       }
+   }
+   Sale.decorators.quebec={
+       getPrice:function(price){
+           var price=this.uber.getPrice();
+           price+=price*7.5 / 100;
+           return price;
+       }
+   }
+   Sale.decorators.money={
+       getPrice:function(price){
+           return "$"+this.uber.getPrice().toFixed(2);
+       }
+   }
+   Sale.decorators.cdn={
+       getPrice:function(price){
+           return "CDN$"+this.uber.getPrice().toFixed(2);
+       }
+   }
+
+   Sale.prototype.decorate=function(decorator){
+      this.decorators_list.push(decorator);
+   }
+   Sale.prototype.getPrice=function(){
+       var price=this.price,i,max=this.decorators_list.lengt,name;
+       for(i=0;i<max;i+=1){
+           name=this.decorators_list[i];
+           price=Sale.decorators[name].getPrice(price);
+       }
+       return price;
+   }
+   var sale=new Sale(100);
+   sale.decorate('fedtax');
+   console.log(sale.decorate('fedtax'));
+   console.log(sale.decorate('quebec'));
+   console.log(sale.decorate('money'));
+   console.log(sale.decorate('cdn'));
+   console.log(sale.getPrice());*/
+</script>
+</body>
+</html>
